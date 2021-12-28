@@ -5,8 +5,11 @@ const User = ({ user }) => {
   return (
     <Card>
       <Card.Body>
-        <p>Name: {user.name}</p>
+        <h3>Name: {user.name}</h3>
         <p>Email: {user.email}</p>
+        <p>Street: {user.street}</p>
+        <p>Number: {user.number}</p>
+        <p>Country: {user.country}</p>
       </Card.Body>
     </Card>
   );

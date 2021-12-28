@@ -51,6 +51,9 @@ const users = [
     name: "Sandeep",
     email: "sandeep@example.com",
     password: "123456",
+    street: "46/1, Sridhama Manssion, 2 Floor, S P Road",
+    number: 2371040,
+    country: "India",
     token: "Sandeep-123",
   },
   {
@@ -58,6 +61,9 @@ const users = [
     name: "Liquid",
     email: "liquid@example.com",
     password: "123456",
+    street: "45 Kakad Industrial Estate, L J Cross Road No 3, Mahim",
+    number: 2372340,
+    country: "India",
     token: "Liquid-123",
   },
 ];
@@ -98,6 +104,9 @@ const getUserDetails = (id, token) => {
       resolve({
         name: user.name,
         email: user.email,
+        street: user.street,
+        number: user.number,
+        country: user.country,
       });
     } else {
       reject({ message: "Not Authorized" });
