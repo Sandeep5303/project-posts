@@ -9,22 +9,31 @@ import {
 
 import { getDummyPosts, getPostById } from "../../data";
 
-export const listPosts = () => async (dispatch) => {
+export const listPosts = () => async (dispatch, getState) => {
   try {
     dispatch({ type: POST_LIST_REQUEST });
 
-    const { posts } = await getDummyPosts();
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const { posts } = await getDummyPosts(userInfo?.token);
 
     dispatch({ type: POST_LIST_SUCCESS, payload: posts });
   } catch (error) {
     dispatch({ type: POST_LIST_FAIL, payload: error.message });
   }
 };
-export const listPostDetails = (id) => async (dispatch) => {
+
+export const listPostDetails = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: POST_DETAILS_REQUEST });
 
-    const { post } = await getPostById(id);
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const { post } = await getPostById(id, userInfo?.token);
 
     dispatch({ type: POST_DETAILS_SUCCESS, payload: post });
   } catch (error) {

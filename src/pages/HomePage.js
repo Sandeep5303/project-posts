@@ -11,26 +11,30 @@ import { listPosts } from "../redux/post/postActions";
 const HomePage = () => {
   const dispatch = useDispatch();
 
+  const postList = useSelector((state) => state.postList);
+  const { loading, error, posts } = postList;
+
   useEffect(() => {
     dispatch(listPosts());
   }, [dispatch]);
 
-  const postList = useSelector((state) => state.postList);
-  const { loading, error, posts } = postList;
-
   return (
     <>
       <h1>Latest Posts</h1>
-      {loading && <Loader />}
-      {error && <Message variant="dander">{error}</Message>}
-      <Row>
-        {posts.map((post) => (
-          <Col key={`post_${post.id}`} sm={12} md={6} lg={6}>
-            <h3>{post.title}</h3>
-            <Post post={post} />
-          </Col>
-        ))}
-      </Row>
+      {loading ? (
+        <Loader />
+      ) : error ? (
+        <Message variant="danger">{error}</Message>
+      ) : (
+        <Row>
+          {posts.map((post) => (
+            <Col key={`post_${post.id}`} sm={12} md={6} lg={6}>
+              <h3>{post.title}</h3>
+              <Post post={post} />
+            </Col>
+          ))}
+        </Row>
+      )}
     </>
   );
 };
